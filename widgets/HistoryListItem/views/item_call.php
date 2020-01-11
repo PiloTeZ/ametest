@@ -7,10 +7,10 @@ $answered = $model->call && $model->call->status == Call::STATUS_ANSWERED;
 ?>
 <?= $this->render('_item_common', [
     'user' => $model->user,
-    'content' => $call->comment ?? '',
+    'content' => $model->call->comment ?? '',
     'body' => HistoryListHelper::getBodyByModel($model),
     'footerDatetime' => $model->ins_ts,
-    'footer' => isset($call->applicant) ? "Called <span>{$call->applicant->name}</span>" : null,
+    'footer' => isset($model->call->applicant) ? "Called <span>{$model->call->applicant->name}</span>" : null,
     'iconClass' => $answered ? 'md-phone bg-green' : 'md-phone-missed bg-red',
-    'iconIncome' => $answered && $call->direction == Call::DIRECTION_INCOMING,
+    'iconIncome' => $answered && $model->call->direction == Call::DIRECTION_INCOMING,
 ]) ?>

@@ -16,4 +16,4 @@
 </div>
 
 <?= $this->render('item_parts/username', ['user' => $model->user]) ?>
-<?= $this->render('item_parts/content', ['content' => $content]) ?>
+<?= $this->render('item_parts/content', ['content' => $content ?? null]) ?>

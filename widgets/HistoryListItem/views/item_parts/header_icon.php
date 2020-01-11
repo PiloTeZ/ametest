@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-if (!$iconClass) {
+if (empty($iconClass)) {
     return;
 }
 ?>

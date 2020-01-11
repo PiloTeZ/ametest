@@ -1,5 +1,5 @@
 <?php
-if (!$content) {
+if (empty($content)) {
     return;
 }
 ?>

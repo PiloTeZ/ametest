@@ -1,5 +1,5 @@
 <?php
-if (!$datetime) {
+if (empty($datetime)) {
     return;
 }
 ?>

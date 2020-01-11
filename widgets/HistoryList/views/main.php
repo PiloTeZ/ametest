@@ -8,7 +8,6 @@ use yii\widgets\Pjax;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $model \app\models\search\HistorySearch */
 /* @var $linkExport string */
-
 ?>
 
 <?php Pjax::begin(['id' => 'grid-pjax', 'formSelector' => false]); ?>
@@ -33,7 +32,9 @@ use yii\widgets\Pjax;
 <?php echo ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView' => function ($model, $key, $index, $widget) {
-        ret
+        $itemWidget = $this->context->getItemWidget($model);
+
+        return $itemWidget::widget(['model' => $model]);
     },
     'options' => [
         'tag' => 'ul',

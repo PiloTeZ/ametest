@@ -1,5 +1,5 @@
 <?php
-if (!$footerDatetime) {
+if (empty($footerDatetime)) {
     return;
 }
 ?>

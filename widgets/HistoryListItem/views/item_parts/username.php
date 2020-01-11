@@ -1,5 +1,5 @@
 <?php
-if (!$user) {
+if (empty($user)) {
     return;
 }
 ?>
