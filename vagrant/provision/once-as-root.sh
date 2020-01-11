@@ -27,11 +27,15 @@ debconf-set-selections <<< "mariadb-server-10.0 mysql-server/root_password_again
 echo "Done!"
 
 info "Update OS software"
+add-apt-repository ppa:ondrej/php
 apt-get update
 apt-get upgrade -y
+deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main
+deb-src http://ppa.launchpad.net/ondrej/php/ubuntu xenial main
 
 info "Install additional software"
-apt-get install -y php7.0-curl php7.0-cli php7.0-intl php7.0-mysqlnd php7.0-gd php7.0-fpm php7.0-mbstring php7.0-xml unzip nginx mariadb-server-10.0 php.xdebug
+apt-get install -y php7.3-curl php7.3-cli php7.3-intl php7.3-mysqlnd php7.3-gd php7.3-fpm php7.3-mbstring php7.3-xml unzip nginx mariadb-server-10.0 php.xdebug
+apt-get install -y php7.3-zip
 
 info "Configure MySQL"
 sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -42,14 +46,15 @@ mysql -uroot <<< "FLUSH PRIVILEGES"
 echo "Done!"
 
 info "Configure PHP-FPM"
-sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
-cat << EOF > /etc/php/7.0/mods-available/xdebug.ini
+sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.3/fpm/pool.d/www.conf
+sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.3/fpm/pool.d/www.conf
+sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.3/fpm/pool.d/www.conf
+cat << EOF > /etc/php/7.3/mods-available/xdebug.ini
 zend_extension=xdebug.so
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
 xdebug.remote_port=9000
+xdebug.remote_host=192.168.83.137
 xdebug.remote_autostart=1
 EOF
 echo "Done!"
