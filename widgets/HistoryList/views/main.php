@@ -32,7 +32,9 @@ use yii\widgets\Pjax;
 
 <?php echo ListView::widget([
     'dataProvider' => $dataProvider,
-    'itemView' => '_item',
+    'itemView' => function ($model, $key, $index, $widget) {
+        ret
+    },
     'options' => [
         'tag' => 'ul',
         'class' => 'list-group'

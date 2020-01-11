@@ -11,6 +11,10 @@ use Yii;
 
 class HistoryList extends Widget
 {
+    public $mapTypeToWidget = [
+
+    ];
+
     public function run()
     {
         $model = new HistorySearch();
@@ -35,4 +39,6 @@ class HistoryList extends Widget
 
         return Url::to($params);
     }
+
+
 }
