@@ -7,5 +7,5 @@ use app\widgets\HistoryList\helpers\HistoryListHelper;
     'body' => HistoryListHelper::getBodyByModel($model),
     'iconClass' => 'fa fa-check-square bg-yellow',
     'footerDatetime' => $model->ins_ts,
-    'footer' => isset($model->task->customerCreditor->name) ? "Creditor: " . $model->task->customerCreditor->name : '',
+    'footer' => isset($model->task->customerCreditor->name) ? "Creditor: " . $model->task->customerCreditor->name : ''
 ]) ?>
