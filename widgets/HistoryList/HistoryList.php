@@ -5,6 +5,7 @@ namespace app\widgets\HistoryList;
 use app\models\History;
 use app\models\search\HistorySearch;
 use app\widgets\Export\Export;
+use app\widgets\HistoryListItem\AbstractHistoryItem;
 use app\widgets\HistoryListItem\HistoryItemCall;
 use app\widgets\HistoryListItem\HistoryItemDefault;
 use app\widgets\HistoryListItem\HistoryItemFax;
@@ -19,6 +20,9 @@ use Yii;
 
 class HistoryList extends Widget
 {
+    /**
+     * @var array Маппинг событие => виджет для отображения элемента списка
+     */
     public $mapEventToWidget = [
         History::EVENT_CREATED_TASK => HistoryItemTask::class,
         History::EVENT_UPDATED_TASK => HistoryItemTask::class,
@@ -48,8 +52,23 @@ class HistoryList extends Widget
         ]);
     }
 
-    public function getItemWidget(History $model) {
+    /**
+     * @param History $model
+     * @return string|AbstractHistoryItem
+     */
+    public function getItemWidget(History $model): string
+    {
         return ArrayHelper::getValue($this->mapEventToWidget, $model->event, HistoryItemDefault::class);
+    }
+
+    /**
+     * @param History $model
+     * @return string
+     * @throws \Exception
+     */
+    public function renderItemWidget(History $model): string
+    {
+        return ($this->getItemWidget($model))::widget(['model' => $model]);
     }
 
     /**
