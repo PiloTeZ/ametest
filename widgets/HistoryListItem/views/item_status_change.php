@@ -1,6 +1,4 @@
 <?php
-use yii\helpers\Html;
-
 /* @var $model \app\models\History */
 /* @var $oldValue string */
 /* @var $newValue string */
@@ -14,15 +12,8 @@ use yii\helpers\Html;
         "<span class='badge badge-pill badge-success'>" . ($newValue ?? "<i>not set</i>") . "</span>";
     ?>
 
-    <span><?= \app\widgets\DateTime\DateTime::widget(['dateTime' =>  $model->ins_ts]) ?></span>
+    <?= $this->render('parts/body_datetime', ['datetime' => $model->ins_ts]) ?>
 </div>
 
-<?php if (isset($model->user)): ?>
-    <div class="bg-info"><?= $model->user->username; ?></div>
-<?php endif; ?>
-
-<?php if (isset($content) && $content): ?>
-    <div class="bg-info">
-        <?php echo $content ?>
-    </div>
-<?php endif; ?>
+<?= $this->render('parts/username', ['user' => $model->user]) ?>
+<?= $this->render('parts/content', ['content' => $content ?? null]) ?>

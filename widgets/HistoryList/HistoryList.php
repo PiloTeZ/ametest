@@ -7,7 +7,6 @@ use app\widgets\Export\Export;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
-use Yii;
 
 class HistoryList extends Widget
 {
@@ -18,7 +17,7 @@ class HistoryList extends Widget
         return $this->render('main', [
             'model' => $model,
             'linkExport' => $this->getLinkExport(),
-            'dataProvider' => $model->search(\Yii::$app->request->queryParams)
+            'dataProvider' => $model->search(\Yii::$app->request->queryParams),
         ]);
     }
 
@@ -29,7 +28,7 @@ class HistoryList extends Widget
     {
         $params = \Yii::$app->getRequest()->getQueryParams();
         $params = ArrayHelper::merge([
-            'exportType' => Export::FORMAT_CSV
+            'exportType' => Export::FORMAT_CSV,
         ], $params);
         $params[0] = 'site/export';
 

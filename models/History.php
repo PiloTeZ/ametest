@@ -25,8 +25,6 @@ use Yii;
  */
 class History extends \yii\db\ActiveRecord
 {
-    use ObjectNameTrait;
-
     const EVENT_CREATED_TASK = 'created_task';
     const EVENT_UPDATED_TASK = 'updated_task';
     const EVENT_COMPLETED_TASK = 'completed_task';
@@ -90,7 +88,7 @@ class History extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Customer::class, ['id' => 'customer_id']);
     }
 
     /**
@@ -98,7 +96,27 @@ class History extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getSms()
+    {
+        return $this->hasOne(Sms::class, ['id' => 'object_id']);
+    }
+
+    public function getTask()
+    {
+        return $this->hasOne(Task::class, ['id' => 'object_id']);
+    }
+
+    public function getCall()
+    {
+        return $this->hasOne(Call::class, ['id' => 'object_id']);
+    }
+
+    public function getFax()
+    {
+        return $this->hasOne(Fax::class, ['id' => 'object_id']);
     }
 
     /**

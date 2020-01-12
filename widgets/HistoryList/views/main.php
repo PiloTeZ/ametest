@@ -1,5 +1,6 @@
 <?php
 
+use app\widgets\HistoryListItem\helpers\HistoryItemHelper;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -8,7 +9,6 @@ use yii\widgets\Pjax;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $model \app\models\search\HistorySearch */
 /* @var $linkExport string */
-
 ?>
 
 <?php Pjax::begin(['id' => 'grid-pjax', 'formSelector' => false]); ?>
@@ -32,7 +32,9 @@ use yii\widgets\Pjax;
 
 <?php echo ListView::widget([
     'dataProvider' => $dataProvider,
-    'itemView' => '_item',
+    'itemView' => function ($model, $key, $index, $widget) {
+        return HistoryItemHelper::render($model);
+    },
     'options' => [
         'tag' => 'ul',
         'class' => 'list-group'
