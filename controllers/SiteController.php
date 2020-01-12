@@ -69,6 +69,9 @@ class SiteController extends Controller
      */
     public function actionExport($exportType)
     {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', '2048M');
+
         $model = new HistorySearch();
 
         return $this->render('export', [
