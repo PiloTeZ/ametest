@@ -1,5 +1,6 @@
 <?php
 
+use app\widgets\HistoryListItem\helpers\HistoryItemHelper;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -32,7 +33,7 @@ use yii\widgets\Pjax;
 <?php echo ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView' => function ($model, $key, $index, $widget) {
-        return $this->context->renderItemWidget($model);
+        return HistoryItemHelper::render($model);
     },
     'options' => [
         'tag' => 'ul',

@@ -2,16 +2,17 @@
 
 namespace app\components;
 
-use app\components\historyExportColumns\AbstractHistoryExportColumns;
 use app\components\historyExportColumns\HistoryExportColumnsDefault;
-use app\components\historyExportColumns\HistoryExportColumnsSms;
-use app\components\historyExportColumns\HistoryExportColumnsTask;
+use app\components\historyExportColumns\HistoryExportColumnsInterface;
 use app\models\History;
 
+/**
+ * Подбирает класс для генерации данных экспорта в зависимости от типа события
+ */
 class HistoryExportColumns extends \yii\base\BaseObject
 {
     public static $mapEventToHandler = [
-        // Пример
+        // Пример. Ничего не используется, так как на данный момент не нужно
 //        History::EVENT_CREATED_TASK => HistoryExportColumnsTask::class,
 //        History::EVENT_UPDATED_TASK => HistoryExportColumnsTask::class,
 //        History::EVENT_INCOMING_SMS => HistoryExportColumnsSms::class,
@@ -20,7 +21,7 @@ class HistoryExportColumns extends \yii\base\BaseObject
 
     /**
      * @param History $model
-     * @return string|AbstractHistoryExportColumns
+     * @return string|HistoryExportColumnsInterface
      */
     public static function columns(History $model): string
     {

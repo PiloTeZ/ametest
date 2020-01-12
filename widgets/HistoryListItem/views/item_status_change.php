@@ -12,8 +12,8 @@
         "<span class='badge badge-pill badge-success'>" . ($newValue ?? "<i>not set</i>") . "</span>";
     ?>
 
-    <?= $this->render('item_parts/body_datetime', ['datetime' => $model->ins_ts]) ?>
+    <?= $this->render('parts/body_datetime', ['datetime' => $model->ins_ts]) ?>
 </div>
 
-<?= $this->render('item_parts/username', ['user' => $model->user]) ?>
-<?= $this->render('item_parts/content', ['content' => $content ?? null]) ?>
+<?= $this->render('parts/username', ['user' => $model->user]) ?>
+<?= $this->render('parts/content', ['content' => $content ?? null]) ?>
